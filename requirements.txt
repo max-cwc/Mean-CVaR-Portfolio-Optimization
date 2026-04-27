@@ -3,4 +3,3 @@ yfinance
 pandas
 numpy
 matplotlib
-matplotlib.dates
