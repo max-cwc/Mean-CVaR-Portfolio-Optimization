@@ -67,7 +67,7 @@ def load_stock_data(tickers, start, end):
         prices = data[["Close"]]
         prices.columns = tickers
 
-    return prices.dropna()
+    return prices.dropna(how="all").ffill().dropna()
 
 
 if len(tickers) == 0:
