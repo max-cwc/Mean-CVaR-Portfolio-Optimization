@@ -41,7 +41,7 @@ selected_horizon = st.sidebar.pills(
     default="1 Year"
 )
 
-end_date = date.today()
+end_date = date.today() + timedelta(days=1)
 start_date = end_date - timedelta(days=horizon_map[selected_horizon])
 
 # -----------------------------
