@@ -92,11 +92,11 @@ st.dataframe(prices.tail())
 normalized_prices = prices / prices.iloc[0]
 
 # -----------------------------
-# Plot graph (smaller + cleaner)
+# Plot graph (fixed date axis)
 # -----------------------------
 st.subheader("Normalized Stock Price Comparison")
 
-fig, ax = plt.subplots(figsize=(7, 3.5))  # reduced size
+fig, ax = plt.subplots(figsize=(8, 4))
 
 for ticker in normalized_prices.columns:
     ax.plot(normalized_prices.index, normalized_prices[ticker], label=ticker)
@@ -106,8 +106,6 @@ ax.set_xlabel("Date")
 ax.set_ylabel("Normalized Price")
 ax.legend(fontsize=8)
 ax.grid(True)
-
-st.pyplot(fig, use_container_width=False)
 
 # -----------------------------
 # Basic stats
