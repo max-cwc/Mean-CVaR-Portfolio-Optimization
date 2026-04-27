@@ -3,6 +3,8 @@ import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.dates as mdates
+
 from datetime import date, timedelta
 
 st.set_page_config(page_title="Portfolio CVaR Project", layout="wide")
@@ -41,7 +43,7 @@ selected_horizon = st.sidebar.pills(
     default="1 Year"
 )
 
-end_date = date.today() + timedelta(days=1)
+end_date = date.today()
 start_date = end_date - timedelta(days=horizon_map[selected_horizon])
 
 # -----------------------------
@@ -68,7 +70,6 @@ def load_stock_data(tickers, start, end):
         prices.columns = tickers
 
     return prices.dropna(how="all").ffill().dropna()
-
 
 if len(tickers) == 0:
     st.warning("Please enter at least one ticker.")
@@ -106,6 +107,14 @@ ax.set_xlabel("Date")
 ax.set_ylabel("Normalized Price")
 ax.legend(fontsize=8)
 ax.grid(True)
+
+# --- Fix date formatting ---
+ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+
+plt.xticks(rotation=30)
+
+st.pyplot(fig, use_container_width=False)
 
 # -----------------------------
 # Basic stats
